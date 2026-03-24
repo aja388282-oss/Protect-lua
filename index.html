@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lua Protect</title>
+</head>
+<body style="background:black;color:white;text-align:center">
+
+<h1>Lua Protect</h1>
+
+<textarea id="luaInput" placeholder="Paste Lua..." style="width:80%;height:150px"></textarea><br><br>
+
+<button onclick="protect()">Protect</button>
+
+<h3>Loadstring:</h3>
+<textarea id="result" style="width:80%;height:100px"></textarea>
+
+<script>
+async function protect() {
+    let lua = document.getElementById("luaInput").value;
+
+    let res = await fetch("https://DOMAIN-KAMU/protect", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ lua })
+    });
+
+    let data = await res.json();
+
+    document.getElementById("result").value = data.loadstring;
+}
+</script>
+
+</body>
+</html>
